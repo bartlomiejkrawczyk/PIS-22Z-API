@@ -7,9 +7,9 @@ import spock.lang.Specification
 @SpringBootTest
 class ApiApplicationTest extends Specification {
 
-    def 'Should load context correctly'() {
-        expect:
-        true
-    }
+	def 'Should load context correctly'() {
+		expect:
+		true
+	}
 
 }

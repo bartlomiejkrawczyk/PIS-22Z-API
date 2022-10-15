@@ -8,12 +8,12 @@ import spock.lang.Specification
 @SpringBootTest
 class LoadContextTest extends Specification {
 
-    @Autowired
-    WebController webController
+	@Autowired
+	WebController webController
 
-    def 'Should create beans when context is loaded'() {
-        expect: 'the WebController is created'
-        webController
-    }
+	def 'Should create beans when context is loaded'() {
+		expect: 'the WebController is created'
+		webController
+	}
 
 }

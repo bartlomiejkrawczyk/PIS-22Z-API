@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/ping")
 public interface WebController {
 
-    @GetMapping({"{phrase}", ""})
-    Mono<String> ping(@PathVariable(required = false) String phrase);
+	@GetMapping({"{phrase}", ""})
+	Mono<String> ping(@PathVariable(required = false) String phrase);
 }

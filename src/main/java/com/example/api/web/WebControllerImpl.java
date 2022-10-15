@@ -8,11 +8,11 @@ import reactor.core.publisher.Mono;
 @NoArgsConstructor
 public class WebControllerImpl implements WebController {
 
-    @Override
-    public Mono<String> ping(String phrase) {
-        return Mono.justOrEmpty(phrase)
-                .map(name -> String.format("Hello, %s!", name))
-                .defaultIfEmpty("Hello, World!");
-    }
+	@Override
+	public Mono<String> ping(String phrase) {
+		return Mono.justOrEmpty(phrase)
+				.map(name -> String.format("Hello, %s!", name))
+				.defaultIfEmpty("Hello, World!");
+	}
 
 }
