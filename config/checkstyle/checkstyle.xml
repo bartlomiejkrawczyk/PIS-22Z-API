@@ -7,9 +7,9 @@
 
 	<property name="severity" value="warning"/>
 
-	<property name="fileExtensions" value="java, properties, groovy, gradle, md, .gitignore"/>
+	<property name="fileExtensions" value="java, xml, properties, groovy, gradle, md, .gitignore"/>
 	<module name="BeforeExecutionExclusionFileFilter">
-		<property name="fileNamePattern" value="module\-info\.java$"/>
+		<property name="fileNamePattern" value="(.idea)|(.git)[\\/].*$"/>
 	</module>
 
 	<module name="LineLength">
