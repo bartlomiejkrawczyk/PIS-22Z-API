@@ -1,17 +1,17 @@
 testing {
-    suites {
-        integrationTest(JvmTestSuite) {
-            dependencies {
-                implementation project
-            }
-        }
-    }
+	suites {
+		integrationTest(JvmTestSuite) {
+			dependencies {
+				implementation project
+			}
+		}
+	}
 }
 
 configurations {
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
-    integrationTestImplementation.extendsFrom testImplementation
+	integrationTestCompile.extendsFrom testCompile
+	integrationTestRuntime.extendsFrom testRuntime
+	integrationTestImplementation.extendsFrom testImplementation
 }
 
 check.dependsOn integrationTest
