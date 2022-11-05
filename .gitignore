@@ -35,6 +35,10 @@ out/
 bin/
 HELP.md
 
+# Workspace Specific
+data/
+workspace.properties
+
 # Unit test reports
 TEST*.xml
 
