@@ -15,3 +15,11 @@ services:
             - '3306'
         volumes:
             - ../data/mysql/:/var/lib/mysql
+    swift:
+        image: dockerswiftaio/docker-swift:latest
+        container_name: swift
+        restart: unless-stopped
+        ports:
+            - "49000:8080"
+        volumes:
+            - ../data/swift/:/swift/nodes/1/node/sdb1
