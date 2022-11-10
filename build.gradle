@@ -57,7 +57,7 @@ tasks.named('test') {
 
 checkstyleMain {
 	source = fileTree('.') {
-		excludes = ['.*/**', 'gradle*', 'build/**', '*.iml', '*.log', '**/*.jar']
+		excludes = ['.*/**', 'gradle*', 'build/**', '*.iml', '*.log', '**/*.jar', 'data/**']
 	}
 }
 
