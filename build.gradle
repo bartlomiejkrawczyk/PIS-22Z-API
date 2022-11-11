@@ -5,6 +5,7 @@ plugins {
 	id 'war'
 	id 'groovy'
 	id 'checkstyle'
+	id 'org.sonarqube' version '3.4.0.2513'
 }
 
 group = 'com.example'
@@ -48,5 +49,12 @@ tasks.named('test') {
 checkstyleMain {
 	source = fileTree('.') {
 		excludes = ['.*/**', 'gradle*', 'build/**', '*.iml', '*.log', '**/*.jar']
+	}
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "pis22z_api_AYRoUOdphCb-_oA5D4A0"
+		property "sonar.qualitygate.wait", true
 	}
 }
