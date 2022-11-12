@@ -53,12 +53,14 @@ dependencies {
 	testImplementation 'org.codehaus.groovy:groovy-all:3.0.13'
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
 }
 
 jacocoTestReport {
 	dependsOn(test)
+	dependsOn(integrationTest)
+	getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
 	reports {
 		xml.enabled true
 	}
