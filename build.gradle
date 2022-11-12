@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'war'
 	id 'groovy'
+	id 'jacoco'
 	id 'checkstyle'
 	id 'maven-publish'
 	id 'org.sonarqube' version '3.4.0.2513'
@@ -54,6 +55,13 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	dependsOn(test)
+	reports {
+		xml.enabled true
+	}
 }
 
 checkstyleMain {
