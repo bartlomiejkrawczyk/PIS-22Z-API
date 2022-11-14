@@ -39,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java:'
 	annotationProcessor 'org.projectlombok:lombok'
