@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'war'
 	id 'groovy'
+	id 'jacoco'
 	id 'checkstyle'
 	id 'maven-publish'
 	id 'org.sonarqube' version '3.4.0.2513'
@@ -38,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java:'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -52,8 +54,17 @@ dependencies {
 	testImplementation 'org.codehaus.groovy:groovy-all:3.0.13'
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	dependsOn(test)
+	dependsOn(integrationTest)
+	getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+	reports {
+		xml.enabled true
+	}
 }
 
 checkstyleMain {
