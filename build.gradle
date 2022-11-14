@@ -4,7 +4,10 @@ plugins {
 	id 'java'
 	id 'war'
 	id 'groovy'
+	id 'jacoco'
 	id 'checkstyle'
+	id 'maven-publish'
+	id 'org.sonarqube' version '3.4.0.2513'
 }
 
 group = 'com.example'
@@ -19,14 +22,24 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		url = uri("http://localhost:8081/repository/maven-private")
+		credentials {
+			username = nexusUsername
+			password = nexusPassword
+		}
+		allowInsecureProtocol = true
+	}
 }
 
 apply from: "$rootDir/integration-test.gradle"
 
 dependencies {
+	implementation 'com.example:model:1.0-SNAPSHOT'
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java:'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -41,12 +54,50 @@ dependencies {
 	testImplementation 'org.codehaus.groovy:groovy-all:3.0.13'
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	dependsOn(test)
+	dependsOn(integrationTest)
+	getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+	reports {
+		xml.enabled true
+	}
 }
 
 checkstyleMain {
 	source = fileTree('.') {
 		excludes = ['.*/**', 'gradle*', 'build/**', '*.iml', '*.log', '**/*.jar', 'data/**']
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			if (project.version.endsWith('-SNAPSHOT')) {
+				url = "http://localhost:8081/repository/maven-snapshots"
+			} else {
+				url = "http://localhost:8081/repository/maven-releases"
+			}
+			credentials {
+				username = nexusUsername
+				password = nexusPassword
+			}
+			allowInsecureProtocol = true
+		}
+	}
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "pis22z_api_AYRoUOdphCb-_oA5D4A0"
+		property "sonar.qualitygate.wait", true
 	}
 }
