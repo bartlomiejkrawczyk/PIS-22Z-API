@@ -1,9 +1,11 @@
 package com.example.api.wiki.entity;
 
+import com.example.api.wiki.entity.id.ParagraphId;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,7 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@IdClass(ParagraphId.class)
 @Table(name = "PARAGRAPHS")
 public class ParagraphEntity implements Serializable {
 
