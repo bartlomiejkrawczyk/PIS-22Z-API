@@ -16,9 +16,10 @@ public interface ParagraphMapper {
 	@Mapping(target = "multimedia", ignore = true)
 	Paragraph entityToDto(ParagraphEntity entity);
 
+	@Mapping(target = "conceptId", expression = "java(conceptId)")
 	@Mapping(target = "number")
 	@Mapping(target = "sequentialNumber")
 	@Mapping(target = "header")
 	@Mapping(target = "description")
-	ParagraphEntity dtoToEntity(Paragraph dto);
+	ParagraphEntity dtoToEntity(Paragraph dto, int conceptId);
 }

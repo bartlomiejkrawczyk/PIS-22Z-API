@@ -1,6 +1,7 @@
 package com.example.api.wiki.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +48,8 @@ public class ConceptEntity implements Serializable {
 	@Column(name = "SUMMARY", length = 400)
 	String summary;
 
+	@Builder.Default
 	@JoinColumn(name = "CONCEPT_ID")
 	@OneToMany(targetEntity = ParagraphEntity.class, fetch = FetchType.LAZY, orphanRemoval = true)
-	List<ParagraphEntity> paragraphs;
+	List<ParagraphEntity> paragraphs = new ArrayList<>();
 }
