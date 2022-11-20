@@ -35,7 +35,7 @@ repositories {
 apply from: "$rootDir/integration-test.gradle"
 
 dependencies {
-	implementation 'com.example:model:1.0-SNAPSHOT'
+	implementation 'com.example:model:1.1-SNAPSHOT'
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -58,6 +58,7 @@ dependencies {
 	testImplementation 'org.spockframework:spock-core:2.3-groovy-3.0'
 	testImplementation 'org.spockframework:spock-spring:2.3-groovy-3.0'
 	testImplementation 'org.codehaus.groovy:groovy-all:3.0.13'
+	testImplementation 'net.bytebuddy:byte-buddy:1.12.18'
 }
 
 test {

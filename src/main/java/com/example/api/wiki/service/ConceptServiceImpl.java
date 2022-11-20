@@ -41,7 +41,6 @@ public class ConceptServiceImpl implements ConceptService {
 
 	@Transactional
 	public Mono<Concept> saveConcept(Concept concept) {
-		log.info(concept.toString());
 		return Mono.justOrEmpty(concept)
 				.map(conceptMapper::dtoToEntity)
 				.doOnNext(entity -> log.info("Saving entity to database: {}", entity))

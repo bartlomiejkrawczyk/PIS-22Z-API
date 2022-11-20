@@ -51,6 +51,6 @@ public class ConceptEntity implements Serializable {
 
 	@Builder.Default
 	@JoinColumn(name = "CONCEPT_ID")
-	@OneToMany(targetEntity = ParagraphEntity.class, cascade = CascadeType.ALL, mappedBy = "conceptId", fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(targetEntity = ParagraphEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	List<ParagraphEntity> paragraphs = new ArrayList<>();
 }
