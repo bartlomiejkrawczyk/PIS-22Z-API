@@ -3,6 +3,7 @@ package com.example.api.wiki.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,6 +51,6 @@ public class ConceptEntity implements Serializable {
 
 	@Builder.Default
 	@JoinColumn(name = "CONCEPT_ID")
-	@OneToMany(targetEntity = ParagraphEntity.class, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(targetEntity = ParagraphEntity.class, cascade = CascadeType.ALL, mappedBy = "conceptId", fetch = FetchType.LAZY, orphanRemoval = true)
 	List<ParagraphEntity> paragraphs = new ArrayList<>();
 }
