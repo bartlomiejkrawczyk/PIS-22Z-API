@@ -30,8 +30,8 @@ public class ConceptController {
 		return conceptService.getConceptById(id);
 	}
 
-	@PostMapping
-	public Mono<Concept> saveConcept(@RequestBody Concept concept) {
-		return conceptService.saveConcept(concept);
+	@PostMapping("{sectionId}")
+	public Mono<Concept> saveConcept(@RequestBody Concept concept, @PathVariable int sectionId) {
+		return conceptService.saveConcept(concept, sectionId);
 	}
 }

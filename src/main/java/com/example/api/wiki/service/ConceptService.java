@@ -10,5 +10,5 @@ public interface ConceptService {
 
 	Mono<Concept> getConceptById(int id);
 
-	Mono<Concept> saveConcept(Concept concept);
+	Mono<Concept> saveConcept(Concept concept, int sectionId);
 }

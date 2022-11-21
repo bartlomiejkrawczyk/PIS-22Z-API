@@ -44,11 +44,11 @@ class ConceptControllerTest extends Specification {
 
 	def 'When saving concept should propagate method call to service'() {
 		given:
-		service.saveConcept(_ as Concept) >> Mono.justOrEmpty(concept)
-		service.saveConcept(null) >> Mono.empty()
+		service.saveConcept(_ as Concept, id) >> Mono.justOrEmpty(concept)
+		service.saveConcept(null, id) >> Mono.empty()
 
 		expect:
-		controller.saveConcept(concept).block() == concept
+		controller.saveConcept(concept, id).block() == concept
 
 		where:
 		id | concept

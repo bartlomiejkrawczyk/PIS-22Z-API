@@ -40,9 +40,9 @@ public class ConceptServiceImpl implements ConceptService {
 	}
 
 	@Transactional
-	public Mono<Concept> saveConcept(Concept concept) {
+	public Mono<Concept> saveConcept(Concept concept, int sectionId) {
 		return Mono.justOrEmpty(concept)
-				.map(conceptMapper::dtoToEntity)
+				.map(dto -> conceptMapper.dtoToEntity(dto, sectionId))
 				.doOnNext(entity -> log.info("Saving entity to database: {}", entity))
 				.map(conceptRepository::save)
 				.doOnNext(entity -> log.info("Entity saved: {}", entity))

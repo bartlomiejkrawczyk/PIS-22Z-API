@@ -22,8 +22,9 @@ public interface ConceptMapper {
 	Concept entityToConcept(ConceptEntity entity);
 
 	@Mapping(target = "id")
+	@Mapping(target = "sectionId", expression = "java(sectionId)")
 	@Mapping(target = "keyPhrase")
 	@Mapping(target = "summary")
 	@Mapping(target = "paragraphs", ignore = true)
-	ConceptEntity dtoToEntity(Concept entity);
+	ConceptEntity dtoToEntity(Concept entity, int sectionId);
 }

@@ -7,6 +7,7 @@ import com.example.api.wiki.repository.ConceptRepository
 import com.example.model.Concept
 import com.example.model.Definition
 import com.example.model.Paragraph
+import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 import spock.lang.Specification
 
@@ -47,5 +48,23 @@ class ConceptServiceTest extends Specification {
 		1  | new ConceptEntity(1, 1, "test", "test", [new ParagraphEntity(1, 1, 1, "test", "test")]) || new Concept(1, "test", "test", [new Paragraph(1, 1, "test", "test", [])])
 		1  | new ConceptEntity(1, 1, "test", "test", [])                                             || new Concept(1, "test", "test", [])
 		1  | null                                                                                    || null
+	}
+
+
+	def 'Should save concept and nested paragraphs correctly'() {
+		given:
+		repository.save(_ as ConceptEntity) >> entity
+		for (Paragraph paragraph : paragraphs) {
+			paragraphService.saveParagraph(paragraph, 1) >> Mono.justOrEmpty(paragraph)
+		}
+
+		expect:
+		service.saveConcept(object, id).block() == object
+
+		where:
+		id | object                                                                    | entity                                      | paragraphs
+		1  | new Concept(1, "test", "test", [new Paragraph(1, 1, "test", "test", [])]) | new ConceptEntity(1, 1, "test", "test", []) | [new Paragraph(1, 1, "test", "test", [])]
+		1  | new Concept(1, "test", "test", [])                                        | new ConceptEntity(1, 1, "test", "test", []) | []
+		1  | null                                                                      | null                                        | []
 	}
 }
