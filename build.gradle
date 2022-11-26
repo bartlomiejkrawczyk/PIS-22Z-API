@@ -89,13 +89,10 @@ publishing {
 		mavenWeb(MavenPublication) {
 			from components.web
 		}
-		mavenJava(MavenPublication) {
-			from components.java
-		}
 	}
 	repositories {
 		maven {
-			url = "http://localhost:8081/repository/maven-releases"
+			url = "http://localhost:8081/repository/maven-snapshots"
 			credentials {
 				username = nexusUsername
 				password = nexusPassword
