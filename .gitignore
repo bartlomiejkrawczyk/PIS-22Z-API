@@ -61,3 +61,11 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+# Jenkins
+native/
+.tmp/
+daemon/
+wrapper
+notifications/
+
