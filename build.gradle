@@ -92,7 +92,7 @@ publishing {
 	}
 	repositories {
 		maven {
-			url = "http://localhost:8081/repository/maven-snapshots"
+			url = "http://localhost:8081/repository/maven-releases"
 			credentials {
 				username = nexusUsername
 				password = nexusPassword
