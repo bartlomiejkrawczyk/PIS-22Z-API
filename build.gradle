@@ -12,7 +12,6 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -85,11 +84,7 @@ publishing {
 	}
 	repositories {
 		maven {
-			if (project.version.endsWith('-SNAPSHOT')) {
-				url = "http://localhost:8081/repository/maven-snapshots"
-			} else {
-				url = "http://localhost:8081/repository/maven-releases"
-			}
+			url = "http://localhost:8081/repository/maven-releases"
 			credentials {
 				username = nexusUsername
 				password = nexusPassword
