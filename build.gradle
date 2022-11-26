@@ -8,6 +8,7 @@ plugins {
 	id 'checkstyle'
 	id 'maven-publish'
 	id 'org.sonarqube' version '3.4.0.2513'
+	id 'nebula.release' version '15.0.0'
 }
 
 group = 'com.example'
@@ -75,6 +76,9 @@ checkstyleMain {
 
 publishing {
 	publications {
+		mavenWeb(MavenPublication) {
+			from components.web
+		}
 		mavenJava(MavenPublication) {
 			from components.java
 		}
