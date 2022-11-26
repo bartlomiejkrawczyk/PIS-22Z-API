@@ -8,10 +8,10 @@ plugins {
 	id 'checkstyle'
 	id 'maven-publish'
 	id 'org.sonarqube' version '3.4.0.2513'
+	id 'nebula.release' version '15.0.0'
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -36,7 +36,8 @@ apply from: "$rootDir/integration-test.gradle"
 
 dependencies {
 	implementation 'com.example:model:1.1-SNAPSHOT'
-	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
+	implementation 'org.springframework.data:spring-data-jpa:3.0.0'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -51,8 +52,9 @@ dependencies {
 	testImplementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
-	integrationTestImplementation 'org.testcontainers:junit-jupiter:1.17.4'
-	integrationTestImplementation 'org.testcontainers:mysql:1.17.4'
+	integrationTestImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+	integrationTestImplementation 'org.testcontainers:mysql:1.17.6'
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.spockframework:spock-core:2.3-groovy-3.0'
@@ -80,19 +82,20 @@ checkstyleMain {
 	}
 }
 
+tasks.release.finalizedBy tasks.publish
+
 publishing {
 	publications {
+		mavenWeb(MavenPublication) {
+			from components.web
+		}
 		mavenJava(MavenPublication) {
 			from components.java
 		}
 	}
 	repositories {
 		maven {
-			if (project.version.endsWith('-SNAPSHOT')) {
-				url = "http://localhost:8081/repository/maven-snapshots"
-			} else {
-				url = "http://localhost:8081/repository/maven-releases"
-			}
+			url = "http://localhost:8081/repository/maven-releases"
 			credentials {
 				username = nexusUsername
 				password = nexusPassword
