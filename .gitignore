@@ -3,6 +3,7 @@
 
 # Build directory
 build/
+caches/
 
 # Log files
 *.log
