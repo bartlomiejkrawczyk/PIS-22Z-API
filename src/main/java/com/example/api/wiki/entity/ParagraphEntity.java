@@ -33,7 +33,7 @@ public class ParagraphEntity implements Serializable {
 
 	@Id
 	@JoinColumn(name = "CONCEPT_ID")
-	@Column(name = "CONCEPT_ID", nullable = false, unique = true, precision = 8)
+	@Column(name = "CONCEPT_ID", nullable = false, precision = 8)
 	int conceptId;
 
 	@Id
