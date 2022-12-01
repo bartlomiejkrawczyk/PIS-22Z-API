@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,7 +31,6 @@ import lombok.experimental.FieldDefaults;
 public class ParagraphEntity implements Serializable {
 
 	@Id
-	@JoinColumn(name = "CONCEPT_ID")
 	@Column(name = "CONCEPT_ID", nullable = false, precision = 8)
 	int conceptId;
 
