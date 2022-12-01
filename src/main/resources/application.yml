@@ -1,0 +1,8 @@
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health, shutdown, prometheus
+    endpoint:
+        shutdown:
+            enabled: true
