@@ -24,19 +24,19 @@ public class ParagraphServiceImpl implements ParagraphService {
 	public Flux<Paragraph> getParagraphsByConceptId(int conceptId) {
 		return Flux.defer(
 						() -> Flux.fromIterable(paragraphRepository.findAllByConceptId(conceptId))
-				)
-				.subscribeOn(scheduler)
-				.map(paragraphMapper::entityToDto);
+				) //pobiram z bazy danyhch za pomocą custom funkcji
+				.subscribeOn(scheduler) // bookuję scheda
+				.map(paragraphMapper::entityToDto); // zaciągam z powrotem do API
 	}
 
 	@Transactional
 	public Mono<Paragraph> saveParagraph(Paragraph paragraph, int conceptId) {
-		return Mono.justOrEmpty(paragraph)
-				.map(p -> paragraphMapper.dtoToEntity(p, conceptId))
+		return Mono.justOrEmpty(paragraph) // jak się okaże że mono nie jest puste
+				.map(p -> paragraphMapper.dtoToEntity(p, conceptId)) // przerób paragraf do entity
 				.doOnNext(entity -> log.info("Saving entity to database: {}", entity))
-				.map(paragraphRepository::save)
+				.map(paragraphRepository::save) // zapisz mój paragraf do entity; da się przpisać na p -> paragraphRepository.save(p)
 				.doOnNext(entity -> log.info("Entity saved: {}", entity))
-				.subscribeOn(scheduler)
-				.map(paragraphMapper::entityToDto);
+				.subscribeOn(scheduler) // tak aby połączenia do bazy były ograniczone
+				.map(paragraphMapper::entityToDto); // mapuję to coo dostałem z bazy na klasę zewnętrzna
 	}
 }

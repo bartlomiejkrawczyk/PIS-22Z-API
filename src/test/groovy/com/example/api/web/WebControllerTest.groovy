@@ -22,7 +22,7 @@ class WebControllerTest extends Specification {
 		mvc.perform(get(url))
 				.andExpect(status().isOk())
 				.andReturn()
-				.asyncResult == response
+				.asyncResult == response // ponieważ korzystamy z fluxa
 		where:
 		url         || response
 		'/ping'     || 'Hello, World!'

@@ -30,7 +30,7 @@ class ConceptServiceTest extends Specification {
 		expect:
 		service.getDefinitionById(id).block() == result
 
-		where:
+		where: //rezultat oddziela się dwoma pipe'ami - oddniela sięparametry funkcji od jej rezultatu
 		id | entity                                      || result
 		1  | new ConceptEntity(1, 1, "test", "test", []) || new Definition(1, "test", "test")
 		1  | null                                        || null
