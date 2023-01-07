@@ -1,7 +1,6 @@
 package com.example.api.exam.entity;
 
 import com.example.api.exam.entity.id.AnswerId;
-import com.example.api.wiki.entity.id.ParagraphId;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
