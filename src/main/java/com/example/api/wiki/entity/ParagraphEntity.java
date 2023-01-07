@@ -26,7 +26,7 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@IdClass(ParagraphId.class)
+@IdClass(ParagraphId.class) // dodatkowe dla złożonego klucza
 @Table(name = "PARAGRAPHS")
 public class ParagraphEntity implements Serializable {
 

@@ -10,10 +10,11 @@ import org.mapstruct.Mapping;
 @Mapper(config = MapstructConfig.class)
 public interface ConceptMapper {
 
-	@Mapping(target = "id")
+	// po prawo nazwy z ConceptEntity a po lewo sa te które wychodzą
+	@Mapping(target = "id") // takie same nazwy, wystarczy tylko targer
 	@Mapping(target = "concept", source = "keyPhrase")
 	@Mapping(target = "content", source = "summary")
-	Definition entityToDefinition(ConceptEntity entity);
+	Definition entityToDefinition(ConceptEntity entity); // Definition - to samo co concept, ale bez paragrafów
 
 	@Mapping(target = "id")
 	@Mapping(target = "keyPhrase")

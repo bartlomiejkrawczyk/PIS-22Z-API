@@ -17,7 +17,7 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ParagraphId implements Serializable {
+public class ParagraphId implements Serializable { // intellij podpowie że musi implementować jakąś klasę
 
 	int conceptId;
 	int number;

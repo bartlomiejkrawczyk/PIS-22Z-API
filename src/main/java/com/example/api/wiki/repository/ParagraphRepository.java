@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ParagraphRepository extends CrudRepository<ParagraphEntity, ParagraphId> {
-
+	// w ten sposób się robi nietypowe zapytania
+	List<ParagraphEntity> findParagraphEntityByConceptId(int conceptId);
 	List<ParagraphEntity> findAllByConceptId(int conceptId);
 }
