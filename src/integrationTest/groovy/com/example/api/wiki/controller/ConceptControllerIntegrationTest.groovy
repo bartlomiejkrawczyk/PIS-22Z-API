@@ -34,7 +34,7 @@ class ConceptControllerIntegrationTest extends Specification {
 		conceptRepository.deleteAll()
 	}
 
-	def 'When get is called then the response has status 200 and content is Hello, phrase!'() {
+	def 'When get is called then the response has status 200 and content is correct'() {
 		given:
 		conceptRepository.save(entity)
 		for (def paragraph : entity.getParagraphs()) {
