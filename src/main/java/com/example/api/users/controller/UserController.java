@@ -1,12 +1,10 @@
 package com.example.api.users.controller;
 
+import com.example.model.User;
 import com.example.api.users.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,6 +19,8 @@ public class UserController {
         return userService.getPasswordById(id);
     }
 
+    @PostMapping("/register")
+    public Mono<User> saveUser(@RequestBody User user) { return userService.saveUser(user); }
 //    @GetMapping("{id}")
 //    public Mono<Concept> getConceptById(@PathVariable int id) {
 //        return conceptService.getConceptById(id);

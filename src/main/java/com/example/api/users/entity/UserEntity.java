@@ -24,16 +24,16 @@ public class UserEntity implements Serializable {
 	@Column(name = "USER_ID", nullable = false, unique = true, precision = 8)
 	int id;
 
-	@Column(name = "LOGIN", nullable = false, precision = 6)
+	@Column(name = "LOGIN", nullable = false, length = 150)
 	int login;
 
 	@Column(name = "EMAIL", nullable = false, length = 150)
 	String email;
 
-	@Column(name = "PASSWORD", length = 400)
-	String password;
+	@Column(name = "PASSWORD", nullable = false, length = 400)
+	byte[] password;
 
-	@Column(name = "TYPE", length = 400)
+	@Column(name = "TYPE", nullable = false, length = 400)
 	String type;
 
 //	@Builder.Default // gdy korzystasz z buildera przyjmij że pole nie jest nullem tylko new array list (jak nie chcesz mieć null pointerów)
