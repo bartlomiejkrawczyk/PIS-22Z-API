@@ -2,7 +2,6 @@ package com.example.api.exam.controller;
 
 import com.example.api.exam.model.ExerciseDto;
 import com.example.api.exam.service.ExerciseService;
-import com.example.model.exam.Exercise;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class ExerciseController {
 
 	@GetMapping("{sectionId}")
 	public Flux<ExerciseDto> getExerciseBySectionId(int sectionId) {
-		return Flux.empty();
+		return service.getExerciseBySectionId(sectionId);
 	}
 
 	@PostMapping

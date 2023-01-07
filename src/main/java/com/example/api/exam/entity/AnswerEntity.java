@@ -31,18 +31,18 @@ import lombok.experimental.FieldDefaults;
 public class AnswerEntity implements Serializable {
 	@Id
 	@Column(name = "EXERCISE_ID", nullable = false, precision = 9)
-	int exerciseId;
+	int exerciseId; // number of exercise
 
 	@Id
 	@Column(name = "ANSWER_NO", nullable = false, precision = 2)
-	int number;
+	int number; // number of answer on the list
 
 	@Column(name = "CONTENT", length = 100)
-	String content;
+	String content; // content of the answer
 
 	@Column(name = "CORRECT", precision = 1)
-	int correct;
+	int correct; // boolean description for True/False
 
 	@Column(name = "SEQUENTIAL_NUMBER", nullable = false, precision = 4)
-	int sequentialNumber;
+	int sequentialNumber; // wtf?
 }
