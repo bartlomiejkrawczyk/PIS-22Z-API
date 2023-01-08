@@ -54,6 +54,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 		return Flux.fromIterable(answerMapper.dtoToEntities(exerciseDto))
 				.map(answer -> {
 					answer.setExerciseId(entity.getId());
+					answer.getSubAnswers().forEach(it -> it.setExerciseId(entity.getId()));
 					return answer;
 				})
 				.doOnNext(it -> log.info("Saving entity to database: {}", it))
