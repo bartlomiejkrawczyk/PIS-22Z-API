@@ -11,7 +11,7 @@ public interface ConceptService {
 
 	Mono<Concept> getConceptById(int id);
 
-	Flux<Concept> getConceptsBySectionId(int sectionId);
+	Flux<Definition> getConceptsBySectionId(int sectionId);
 
 	Mono<Concept> saveConcept(Concept concept, int sectionId);
 }

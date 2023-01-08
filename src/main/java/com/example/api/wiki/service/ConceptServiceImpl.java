@@ -41,12 +41,12 @@ public class ConceptServiceImpl implements ConceptService {
 	}
 
 	@Override
-	public Flux<Concept> getConceptsBySectionId(int sectionId) {
+	public Flux<Definition> getConceptsBySectionId(int sectionId) {
 		return Flux.defer(
 						() -> Flux.fromIterable(conceptRepository.findAllBySectionId(sectionId))
 				)
 				.subscribeOn(scheduler)
-				.map(conceptMapper::entityToConcept);
+				.map(conceptMapper::entityToDefinition);
 	}
 
 	@Transactional

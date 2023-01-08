@@ -32,7 +32,7 @@ public class ConceptController {
 	}
 
 	@GetMapping("/section/{sectionId}")
-	public Flux<Concept> getConceptsBySectionId(@PathVariable int sectionId) {
+	public Flux<Definition> getConceptsBySectionId(@PathVariable int sectionId) {
 		return conceptService.getConceptsBySectionId(sectionId);
 	}
 
