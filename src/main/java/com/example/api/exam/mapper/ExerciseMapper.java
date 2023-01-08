@@ -1,9 +1,15 @@
 package com.example.api.exam.mapper;
 
+import com.example.api.exam.entity.AnswerEntity;
 import com.example.api.exam.entity.ExerciseEntity;
+import com.example.api.exam.entity.SubAnswerEntity;
 import com.example.model.exam.ExerciseDto;
 import com.example.model.exam.ExerciseType;
+import com.example.model.exam.answer.BlankAnswer;
+import com.example.model.exam.answer.ChoiceAnswer;
+import com.example.model.exam.answer.ListAnswer;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -26,7 +32,11 @@ public class ExerciseMapper {
 	private final Map<ExerciseType, BiConsumer<ExerciseEntity, ExerciseDto.ExerciseDtoBuilder>> mappers = Map.of(
 			ExerciseType.CHOICE, this::toChoice,
 			ExerciseType.FLASH_CARD, this::toFlashCard,
-			ExerciseType.MULTIPLE_CHOICE, this::toChoice
+			ExerciseType.MULTIPLE_CHOICE, this::toMultipleChoice,
+			ExerciseType.TRUTH_OR_FALSE, this::toTruthOrFalse,
+			ExerciseType.MULTIPLE_TRUTH_OR_FALSE, this::toMultipleChoice,
+			ExerciseType.FILL_BLANKS, this::toFillBlanks,
+			ExerciseType.SELECT_FROM_LIST, this::toSelectFromList
 	);
 
 	public ExerciseDto entityToDto(ExerciseEntity entity) {
@@ -71,13 +81,61 @@ public class ExerciseMapper {
 		}
 	}
 
+	private void toTruthOrFalse(ExerciseEntity entity, ExerciseDto.ExerciseDtoBuilder builder) {
+		var answers = entity.getEntities();
+		if (!answers.isEmpty()) {
+			builder.correct(answers.get(0).isCorrect());
+		}
+	}
 
+	private void toMultipleChoice(ExerciseEntity entity, ExerciseDto.ExerciseDtoBuilder builder) {
+		var answers = entity.getEntities()
+				.stream()
+				.sorted(Comparator.comparing(AnswerEntity::getSequentialNumber))
+				.map(it -> ChoiceAnswer.builder()
+						.number(it.getNumber())
+						.content(it.getContent())
+						.correct(it.isCorrect())
+						.build())
+				.toList();
+		builder.choiceAnswers(answers);
+	}
 
-//		builder.possibleAnswers(List.of());
-//		builder.blankAnswers(List.of());
-//		builder.choiceAnswers(List.of());
-//		builder.correctAnswer(null);
-//		builder.listAnswers(List.of());
-//		builder.correct(true);
+	private void toFillBlanks(ExerciseEntity entity, ExerciseDto.ExerciseDtoBuilder builder) {
+		var answers = entity.getEntities()
+				.stream()
+				.sorted(Comparator.comparing(AnswerEntity::getSequentialNumber))
+				.filter(it -> !it.getSubAnswers().isEmpty())
+				.map(it -> BlankAnswer.builder()
+						.start(it.getContent())
+						.answer(it.getSubAnswers().get(0).getContent())
+						.build()
+				)
+				.toList();
+		builder.blankAnswers(answers);
+	}
+
+	private void toSelectFromList(ExerciseEntity entity, ExerciseDto.ExerciseDtoBuilder builder) {
+		var answers = entity.getEntities()
+				.stream()
+				.sorted(Comparator.comparing(AnswerEntity::getSequentialNumber))
+				.filter(it -> !it.getSubAnswers().isEmpty())
+				.map(it -> {
+					var subAnswers = it.getSubAnswers();
+					var correct = subAnswers.stream()
+							.filter(SubAnswerEntity::isCorrect)
+							.findFirst()
+							.map(SubAnswerEntity::getContent)
+							.orElse(null);
+
+					return ListAnswer.builder()
+							.start(it.getContent())
+							.possibleAnswers(subAnswers.stream().map(SubAnswerEntity::getContent).toList())
+							.correctAnswer(correct)
+							.build();
+				})
+				.toList();
+		builder.listAnswers(answers);
+	}
 
 }
