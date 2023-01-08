@@ -27,8 +27,9 @@ public class ExerciseController {
 		return service.getExerciseBySectionId(sectionId);
 	}
 
-	@PostMapping
-	public Mono<ExerciseDto> saveExercise(@RequestBody ExerciseDto exercise) {
-		return service.saveExercise(exercise);
+	@PostMapping("{sectionId}")
+	public Mono<ExerciseDto> saveExercise(@PathVariable int sectionId, @RequestBody ExerciseDto exercise) {
+		log.info("Received: " + exercise.toString());
+		return service.saveExercise(sectionId, exercise);
 	}
 }

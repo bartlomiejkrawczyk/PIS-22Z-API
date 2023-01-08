@@ -2,10 +2,16 @@ package com.example.api.exam.entity;
 
 import com.example.api.exam.entity.id.AnswerId;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -45,4 +51,10 @@ public class AnswerEntity implements Serializable {
 
 	@Column(name = "SEQUENTIAL_NUMBER", nullable = false, precision = 4)
 	int sequentialNumber; // wtf?
+
+	@Builder.Default
+	@JoinColumn(name = "EXERCISE_ID")
+	@JoinColumn(name = "ANSWER_NO")
+	@OneToMany(targetEntity = SubAnswerEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	List<SubAnswerEntity> subAnswers = new ArrayList<>();
 }

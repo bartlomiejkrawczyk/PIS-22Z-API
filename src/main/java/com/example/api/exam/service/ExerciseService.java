@@ -8,5 +8,5 @@ public interface ExerciseService {
 
 	Flux<ExerciseDto> getExerciseBySectionId(int sectionId);
 
-	Mono<ExerciseDto> saveExercise(ExerciseDto exerciseDto);
+	Mono<ExerciseDto> saveExercise(int sectionId, ExerciseDto exerciseDto);
 }
