@@ -1,8 +1,8 @@
-package com.example.api.exam.mappers;
+package com.example.api.exam.mapper;
 
 import com.example.api.config.MapstructConfig;
 import com.example.api.exam.entity.ExerciseEntity;
-import com.example.api.exam.model.ExerciseDto;
+import com.example.model.exam.ExerciseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

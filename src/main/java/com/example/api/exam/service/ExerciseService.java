@@ -1,6 +1,6 @@
 package com.example.api.exam.service;
 
-import com.example.api.exam.model.ExerciseDto;
+import com.example.model.exam.ExerciseDto;
 import reactor.core.publisher.Flux;
 
 public interface ExerciseService {

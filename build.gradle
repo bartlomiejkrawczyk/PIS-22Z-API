@@ -35,7 +35,7 @@ repositories {
 apply from: "$rootDir/integration-test.gradle"
 
 dependencies {
-	implementation 'com.example:model:1.1-SNAPSHOT'
+	implementation 'com.example:model:1.2-SNAPSHOT'
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.0'

@@ -1,7 +1,7 @@
 package com.example.api.exam.controller
 
-import com.example.api.exam.model.ExerciseDto
 import com.example.api.exam.service.ExerciseService
+import com.example.model.exam.ExerciseDto
 import reactor.core.publisher.Mono
 import spock.lang.Specification
 import spock.lang.Subject

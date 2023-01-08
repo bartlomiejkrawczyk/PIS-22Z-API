@@ -1,8 +1,7 @@
 package com.example.api.exam.service;
 
-import com.example.api.exam.mappers.ExerciseMapper;
-import com.example.api.exam.model.ExerciseDto;
 import com.example.api.exam.repository.ExerciseRepository;
+import com.example.model.exam.ExerciseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 
 	public Flux<ExerciseDto> getExerciseBySectionId(int sectionId) {
 		// zmienna - znaleźć wszystkie ExID do sekcji -> zmapować ExEnt do Fluxa Ex
-		return Flux.defer(
-						exerciseRepository.findById(sectionId)
-								.map(ExerciseMapper::EntityToDto)
-				)
-				.subscribeOn(scheduler);
+		return Flux.empty();
+//		return Flux.defer(
+//						exerciseRepository.findById(sectionId)
+//								.map(ExerciseMapper::EntityToDto)
+//				)
+//				.subscribeOn(scheduler);
 	}
 }
