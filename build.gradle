@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.7.6'
+version = '0.8.0'
 sourceCompatibility = '17'
 
 configurations {
@@ -35,7 +35,7 @@ repositories {
 apply from: "$rootDir/integration-test.gradle"
 
 dependencies {
-	implementation 'com.example:model:1.1-SNAPSHOT'
+	implementation 'com.example:model:1.2-SNAPSHOT'
 	implementation 'org.springframework.data:spring-data-jpa:2.7.5'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.0'
@@ -44,6 +44,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'co.elastic.clients:elasticsearch-java:8.5.3'
+	implementation 'org.springframework.data:spring-data-elasticsearch:5.0.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+	implementation 'jakarta.json:jakarta.json-api:2.1.1'
 
 	runtimeOnly("mysql:mysql-connector-java:")
 
