@@ -43,8 +43,8 @@ public class ExerciseEntity implements Serializable {
 	@Column(name = "QUESTION", length = 300)
 	String question;
 
-	@Column(name = "TYPE", length = 1)
-	char type;
+	@Column(name = "TYPE", precision = 1)
+	int type;
 
 	@Column(name = "SECTION_ID", nullable = false, precision = 6)
 	int sectionId;

@@ -47,7 +47,7 @@ public class AnswerEntity implements Serializable {
 	String content; // content of the answer
 
 	@Column(name = "CORRECT", precision = 1)
-	int correct; // boolean description for True/False
+	boolean correct;
 
 	@Column(name = "SEQUENTIAL_NUMBER", nullable = false, precision = 4)
 	int sequentialNumber; // wtf?

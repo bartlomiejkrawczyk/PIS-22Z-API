@@ -1,24 +1,39 @@
 package com.example.api.exam.mapper;
 
-import com.example.api.config.MapstructConfig;
 import com.example.api.exam.entity.AnswerEntity;
 import com.example.model.exam.ExerciseDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.example.model.exam.ExerciseType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Mapper(config = MapstructConfig.class)
-public interface AnswerMapper {
-	@Mapping(target = "exerciseId", source = "id")
-	@Mapping(target = "number", source = "answer_no") //ANSWER_NO
-	@Mapping(target = "content") //CONTENT
-	@Mapping(target = "correct") //CORRECT
-	@Mapping(target = "sequentialNumber", ignore = true) //TODO: SEQUENTIAL_NUMBER - what is it?
-	AnswerEntity dtoToEntity(ExerciseDto entity, int answer_no);
+@Component
+@RequiredArgsConstructor
+public class AnswerMapper {
 
-	@Mapping(target = "id", source = "exerciseId")
-	@Mapping(target = "answer_no", source = "number") //ANSWER_NO
-	@Mapping(target = "content") //CONTENT
-	@Mapping(target = "correct") //CORRECT
-	@Mapping(target = "----idk----", source = "sequentialNumber", ignore = true) //TODO: SEQUENTIAL_NUMBER
-	ExerciseDto EntityToExerciseDto(AnswerEntity entity);
+	public List<AnswerEntity> dtoToEntities(ExerciseDto exercise) {
+
+		if (exercise.getType() == ExerciseType.CHOICE) {
+			var answers = exercise.getPossibleAnswers();
+			var entities = new ArrayList<AnswerEntity>();
+			for (int i = 0; i < answers.size(); i++) {
+				var answer = answers.get(i);
+				entities.add(
+						AnswerEntity.builder()
+								.exerciseId(0)
+								.number(i)
+								.sequentialNumber(i)
+								.content(answer)
+								.correct(Objects.equals(answer, exercise.getCorrectAnswer()))
+								.build()
+				);
+			}
+			return entities;
+
+		}
+		return null;
+	}
+
 }
