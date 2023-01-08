@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -28,6 +29,11 @@ public class ConceptController {
 	@GetMapping("{id}")
 	public Mono<Concept> getConceptById(@PathVariable int id) {
 		return conceptService.getConceptById(id);
+	}
+
+	@GetMapping("/section/{sectionId}")
+	public Flux<Concept> getConceptsBySectionId(@PathVariable int sectionId) {
+		return conceptService.getConceptsBySectionId(sectionId);
 	}
 
 	@PostMapping("{sectionId}")
