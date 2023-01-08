@@ -45,7 +45,7 @@ public class SubAnswerEntity implements Serializable {
 	String content;
 
 	@Column(name = "CORRECT", precision = 1)
-	int correct;
+	boolean correct;
 
 	@Column(name = "SEQUENTIAL_NUMBER", nullable = false, precision = 4)
 	int sequentialNumber;
