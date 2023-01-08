@@ -40,6 +40,15 @@ public class ConceptServiceImpl implements ConceptService {
 				.map(conceptMapper::entityToConcept);
 	}
 
+	@Override
+	public Flux<Definition> getConceptsBySectionId(int sectionId) {
+		return Flux.defer(
+						() -> Flux.fromIterable(conceptRepository.findAllBySectionId(sectionId))
+				)
+				.subscribeOn(scheduler)
+				.map(conceptMapper::entityToDefinition);
+	}
+
 	@Transactional
 	public Mono<Concept> saveConcept(Concept concept, int sectionId) {
 		return Mono.justOrEmpty(concept)

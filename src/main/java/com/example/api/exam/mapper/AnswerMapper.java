@@ -101,7 +101,7 @@ public class AnswerMapper {
 							.number(i)
 							.sequentialNumber(i)
 							.content(answer.getStart())
-							.subAnswers(List.of(new SubAnswerEntity(0, 1, 1, answer.getAnswer(), true, 1)))
+							.subAnswers(List.of(new SubAnswerEntity(0, i, 0, answer.getAnswer(), true, 1)))
 							.build()
 			);
 		}
