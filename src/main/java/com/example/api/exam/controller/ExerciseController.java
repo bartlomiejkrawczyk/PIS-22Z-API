@@ -29,7 +29,6 @@ public class ExerciseController {
 
 	@PostMapping
 	public Mono<ExerciseDto> saveExercise(@RequestBody ExerciseDto exercise) {
-		log.info(exercise.toString());
-		return Mono.justOrEmpty(exercise);
+		return service.saveExercise(exercise);
 	}
 }
