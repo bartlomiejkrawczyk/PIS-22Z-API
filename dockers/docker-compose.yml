@@ -23,3 +23,13 @@ services:
             - "49000:8080"
         volumes:
             - ../data/swift/:/swift/nodes/1/node/sdb1
+    elasticsearch:
+        container_name: elasticsearch
+        image: elasticsearch:8.5.3
+        environment:
+            - xpack.security.enabled=false
+            - "discovery.type=single-node"
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+ 
