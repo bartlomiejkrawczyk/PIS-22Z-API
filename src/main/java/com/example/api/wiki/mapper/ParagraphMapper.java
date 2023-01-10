@@ -8,7 +8,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(config = MapstructConfig.class)
 public interface ParagraphMapper {
-	// jak chcę zignorować jakies pole, to po ptostu ignore = true
 	@Mapping(target = "number")
 	@Mapping(target = "sequentialNumber")
 	@Mapping(target = "header")

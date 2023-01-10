@@ -36,7 +36,7 @@ import lombok.experimental.FieldDefaults;
 public class ConceptEntity implements Serializable {
 
 	@Id
-	@GeneratedValue // automatycznie będzie podbijało wartość
+	@GeneratedValue
 	@Column(name = "CONCEPT_ID", nullable = false, unique = true, precision = 8)
 	int id;
 
@@ -49,8 +49,8 @@ public class ConceptEntity implements Serializable {
 	@Column(name = "SUMMARY", length = 400)
 	String summary;
 
-	@Builder.Default // gdy korzystasz z buildera przyjmij że pole nie jest nullem tylko new array list (jak nie chcesz mieć null pointerów)
-	@JoinColumn(name = "CONCEPT_ID") // gdy zaciągam tabelę, to joinuję z inną tabelą po zadanym kluczu obcym z takim kluczem jakim jest target entity
+	@Builder.Default
+	@JoinColumn(name = "CONCEPT_ID")
 	@OneToMany(targetEntity = ParagraphEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	List<ParagraphEntity> paragraphs = new ArrayList<>(); // zmapowana tabela
+	List<ParagraphEntity> paragraphs = new ArrayList<>();
 }

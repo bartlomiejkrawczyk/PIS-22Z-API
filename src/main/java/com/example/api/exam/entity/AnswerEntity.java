@@ -37,20 +37,20 @@ import lombok.experimental.FieldDefaults;
 public class AnswerEntity implements Serializable {
 	@Id
 	@Column(name = "EXERCISE_ID", nullable = false, precision = 9)
-	int exerciseId; // number of exercise
+	int exerciseId;
 
 	@Id
 	@Column(name = "ANSWER_NO", nullable = false, precision = 2)
-	int number; // number of answer on the list
+	int number;
 
 	@Column(name = "CONTENT", length = 100)
-	String content; // content of the answer
+	String content;
 
 	@Column(name = "CORRECT", precision = 1)
 	boolean correct;
 
 	@Column(name = "SEQUENTIAL_NUMBER", nullable = false, precision = 4)
-	int sequentialNumber; // wtf?
+	int sequentialNumber;
 
 	@Builder.Default
 	@JoinColumn(name = "EXERCISE_ID")

@@ -17,12 +17,12 @@ class ConceptControllerTest extends Specification {
 
 	def 'When getting concept by id should propagate response from service'() {
 		given:
-		service.getConceptById(_ as Integer) >> Mono.justOrEmpty(response) // załadając że zwróci taką odpowiedź
+		service.getConceptById(_ as Integer) >> Mono.justOrEmpty(response)
 
-		expect: // co oczekujesz po wyjściu
-		controller.getConceptById(id).block() == response // mono nie zwróci wartości póki nie wwoła się na nim block
+		expect:
+		controller.getConceptById(id).block() == response
 
-		where: // tabelka parametrów (każdy kolejny jest innym wierszem)
+		where:
 		id || response
 		0  || null
 		1  || new Concept(1, "test", "test", [])
