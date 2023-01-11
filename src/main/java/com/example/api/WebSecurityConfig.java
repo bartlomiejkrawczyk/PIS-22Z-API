@@ -39,8 +39,8 @@ public class WebSecurityConfig {
 				.antMatchers("/user/register").permitAll()
 				.antMatchers("/user/set_role/**").hasRole(Roles.ADMIN.toString())
 				.antMatchers("/hello/**").hasRole(Roles.MODERATOR.toString())
-				.antMatchers("/concept/**").hasRole(Roles.USER.toString())
-				.anyRequest().authenticated()
+//				.antMatchers("/concept/**").hasRole(Roles.USER.toString())
+				.anyRequest().permitAll()
 				.and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
