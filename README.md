@@ -29,9 +29,12 @@ Components:
 
     ENTITY - a data structure that directly corresponds to the structure found in a relational database.
 
-# Classes diagram
 
-![](./img/model.png)
+# Classes Diagram
+
+![](./img/image.png)
+![](./img/image2.png)
+![](./img/image3.png)
 
 # Data Transfer Model (DTOs)
 DTOs and UML diagram are avalaible [here](https://github.com/bartlomiejkrawczyk/PIS-22Z-MODEL).
